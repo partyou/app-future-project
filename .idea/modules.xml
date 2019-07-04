@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app-future-commons/app-future-commons.iml" filepath="$PROJECT_DIR$/app-future-commons/app-future-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-future-project.iml" filepath="$PROJECT_DIR$/app-future-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-future-server/app-future-server.iml" filepath="$PROJECT_DIR$/app-future-server/app-future-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-future-web/app-future-web.iml" filepath="$PROJECT_DIR$/app-future-web/app-future-web.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="app-future-commons" />
+        <module name="app-future-server" />
+        <module name="app-future-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="app-future-commons" target="1.7" />
+      <module name="app-future-project" target="1.7" />
+      <module name="app-future-server" target="1.7" />
+      <module name="app-future-web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

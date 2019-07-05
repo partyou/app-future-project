@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="app-future-web:war">
+    <output-path>$PROJECT_DIR$/app-future-web/target</output-path>
+    <root id="archive" name="app-future-web-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="app-future-web:war exploded" />
+    </root>
+  </artifact>
+</component>

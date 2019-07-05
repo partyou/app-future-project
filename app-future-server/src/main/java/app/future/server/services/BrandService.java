@@ -1,22 +1,16 @@
 package app.future.server.services;
 
 
-import app.futrue.commons.base.PageModel;
-import app.futrue.commons.bean.Brand;
-import app.futrue.commons.services.IBrandService;
+import app.future.commons.base.PageModel;
+import app.future.commons.bean.Brand;
+import app.future.commons.services.IBrandService;
 import app.future.server.dao.BrandMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-
-@Service("brandService")
-@Transactional(value = "transactionManager",propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class BrandService implements IBrandService{
 
 	@Autowired

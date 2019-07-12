@@ -1,6 +1,5 @@
 package app.future.server.services;
 
-
 import app.future.commons.base.PageModel;
 import app.future.commons.bean.Brand;
 import app.future.commons.services.IBrandService;
@@ -13,10 +12,10 @@ import java.util.Map;
 
 public class BrandService implements IBrandService{
 
-	@Autowired
+		@Autowired
 		private BrandMapper brandMapper;
 
-		@Override
+
 		public List<Brand> find(Brand bean)
 				throws Exception {
 			List<Brand> list = null;
@@ -26,16 +25,16 @@ public class BrandService implements IBrandService{
 			return list;
 		}
 
-		@Override
+
 		public Map<String, Object> findByPage(Brand bean,
-				PageModel model) throws Exception {
+											  PageModel model) throws Exception {
 			bean.setModel(model);
 			Long total = findTotal(bean);
 			List<Brand> list = find(bean);
 			return PageModel.putGridMap(total, list);
 		}
 
-		@Override
+
 		public Brand findById(Serializable id) throws Exception {
 			//
 			Brand bean = null;
@@ -44,7 +43,7 @@ public class BrandService implements IBrandService{
 			}
 			return bean;
 		}
-		@Override
+
 		public int delete(Serializable id) throws Exception {
 			int result = 0;
 			if (id!=null) {
@@ -53,7 +52,7 @@ public class BrandService implements IBrandService{
 			return result;
 		}
 
-		@Override
+
 		public int insert(Brand bean) throws Exception {
 			int result = 0;
 			if (bean!=null) {
@@ -62,7 +61,7 @@ public class BrandService implements IBrandService{
 			return result;
 		}
 
-		@Override
+
 		public int update(Brand bean) throws Exception {
 			int result = 0;
 			if (bean != null) {
@@ -71,7 +70,7 @@ public class BrandService implements IBrandService{
 			return result;
 		}
 
-		@Override
+
 		public Long findTotal(Brand bean) throws Exception {
 			Long result = null;
 			if (bean != null) {

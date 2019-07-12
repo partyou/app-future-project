@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserChannelRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.UserChannelRelation" >
+    <result column="user_channel_id" property="userChannelId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="priority" property="priority" jdbcType="VARCHAR" />
+    <result column="rec_status" property="recStatus" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="res1" property="res1" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_channel_id, user_id, channel_id, priority, rec_status, remark, res1, create_time, modify_time
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_channel_relation
+    where user_channel_id= #{userChannelId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_channel_relation
+    where user_channel_id= #{userChannelId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bean.UserChannelRelation">
+    insert into user_channel_relation (
+	user_channel_id,user_id,channel_id,priority,rec_status,remark,res1,create_time,modify_time
+	)
+    values (
+		#{userChannelId,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
+		#{channelId,jdbcType=BIGINT},
+		#{priority,jdbcType=VARCHAR},
+		#{recStatus,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{res1,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP}
+	)
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.UserChannelRelation" >
+    insert into user_channel_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="userChannelId != null " >user_channel_id,</if>
+		<if test="userId != null " >user_id,</if>
+		<if test="channelId != null " >channel_id,</if>
+		<if test="priority != null and priority != ''" >priority,</if>
+		<if test="recStatus != null and recStatus != ''" >rec_status,</if>
+		<if test="remark != null and remark != ''" >remark,</if>
+		<if test="res1 != null and res1 != ''" >res1,</if>
+		<if test="createTime != null " >create_time,</if>
+		<if test="modifyTime != null " >modify_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		<if test="userChannelId != null ">#{userChannelId,jdbcType=BIGINT},</if>
+		<if test="userId != null ">#{userId,jdbcType=BIGINT},</if>
+		<if test="channelId != null ">#{channelId,jdbcType=BIGINT},</if>
+		<if test="priority != null and priority != ''">#{priority,jdbcType=VARCHAR},</if>
+		<if test="recStatus != null and recStatus != ''">#{recStatus,jdbcType=VARCHAR},</if>
+		<if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+		<if test="res1 != null and res1 != ''">#{res1,jdbcType=VARCHAR},</if>
+		<if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+		<if test="modifyTime != null ">#{modifyTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.UserChannelRelation" >
+    update user_channel_relation
+    <set >
+      <if test="userChannelId != null ">user_channel_id = #{userChannelId,jdbcType=BIGINT},</if>
+      <if test="userId != null ">user_id = #{userId,jdbcType=BIGINT},</if>
+      <if test="channelId != null ">channel_id = #{channelId,jdbcType=BIGINT},</if>
+      <if test="priority != null and priority != ''">priority = #{priority,jdbcType=VARCHAR},</if>
+      <if test="recStatus != null and recStatus != ''">rec_status = #{recStatus,jdbcType=VARCHAR},</if>
+      <if test="remark != null and remark != ''">remark = #{remark,jdbcType=VARCHAR},</if>
+      <if test="res1 != null and res1 != ''">res1 = #{res1,jdbcType=VARCHAR},</if>
+      <if test="createTime != null ">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null ">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where user_channel_id= #{userChannelId,jdbcType=BIGINT}
+  </update>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.bean.UserChannelRelation" >
+    update user_channel_relation
+    <set>
+      user_channel_id = #{userChannelId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      channel_id = #{channelId,jdbcType=BIGINT},
+      priority = #{priority,jdbcType=VARCHAR},
+      rec_status = #{recStatus,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      res1 = #{res1,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    </set>
+    where user_channel_id= #{userChannelId,jdbcType=BIGINT}
+  </update>
+ 
+  <sql id="findCondition">
+		<if test="userChannelId != null  ">and  user_channel_id = #{userChannelId,jdbcType=BIGINT}</if>
+		<if test="userId != null  ">and  user_id = #{userId,jdbcType=BIGINT}</if>
+		<if test="channelId != null  ">and  channel_id = #{channelId,jdbcType=BIGINT}</if>
+		<if test="priority != null and priority != '' ">and  priority = #{priority,jdbcType=VARCHAR}</if>
+		<if test="recStatus != null and recStatus != '' ">and  rec_status = #{recStatus,jdbcType=VARCHAR}</if>
+		<if test="remark != null and remark != '' ">and  remark = #{remark,jdbcType=VARCHAR}</if>
+		<if test="res1 != null and res1 != '' ">and  res1 = #{res1,jdbcType=VARCHAR}</if>
+		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+  </sql>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.UserChannelRelation" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_channel_relation
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+	order by create_time desc
+	<if test="model!=null">
+		limit #{model.startRow},#{model.rows}
+	</if>
+  </select>
+  
+  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.UserChannelRelation" >
+    select count(1)
+    from user_channel_relation
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+  </select>
+</mapper>

@@ -1,0 +1,67 @@
+package app.future.server.services;
+
+
+import app.future.commons.base.PageData;
+import app.future.commons.base.PageModel;
+import app.future.commons.bean.NewsChannels;
+import app.future.server.dao.NewsChannelsMapper;
+import com.alibaba.dubbo.common.utils.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+public class NewsChannelsService{
+
+	@Autowired
+	private NewsChannelsMapper newsChannelsMapper;
+	
+	
+	public int insert(NewsChannels bean) throws Exception {
+		return newsChannelsMapper.insert(bean);
+	}
+	
+	
+	public int update(NewsChannels bean) throws Exception {
+		return newsChannelsMapper.updateByPrimaryKeySelective(bean);
+	}
+
+	
+	public List<NewsChannels> find(NewsChannels bean) throws Exception {
+		return newsChannelsMapper.find(bean);
+	}
+
+	
+	public long findTotal(NewsChannels bean) throws Exception {
+		Long result = 0L;
+		if (bean != null) {
+			result = newsChannelsMapper.findTotal(bean);
+		}
+		return result;
+	}
+	
+	
+	public PageData<NewsChannels> findByPage(NewsChannels bean, PageModel model)
+			throws Exception {
+		bean.setModel(model);
+		return PageData.setData(findTotal(bean), find(bean));
+	}
+	
+	
+    public NewsChannels findById(Long id) throws Exception {
+        return newsChannelsMapper.selectByPrimaryKey(id);
+    }
+
+	
+	public NewsChannels findObject(NewsChannels bean) throws Exception {
+		NewsChannels result = null;
+		if (bean!=null) {
+			PageModel model = new PageModel(1, 1);
+			bean.setModel(model);
+		}
+		List<NewsChannels> list = find(bean);
+		if (CollectionUtils.isNotEmpty(list)) {
+			result = list.get(0);
+		}
+		return result;
+	}
+}

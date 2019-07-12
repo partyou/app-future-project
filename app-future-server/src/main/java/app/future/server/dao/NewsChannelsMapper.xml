@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.NewsChannelsMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.NewsChannels" >
+    <result column="channels_id" property="channelsId" jdbcType="BIGINT" />
+    <result column="channels_name" property="channelsName" jdbcType="VARCHAR" />
+    <result column="channels_desc" property="channelsDesc" jdbcType="VARCHAR" />
+    <result column="channel_priority" property="channelPriority" jdbcType="INTEGER" />
+    <result column="rec_status" property="recStatus" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="res1" property="res1" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    channels_id, channels_name, channels_desc, channel_priority, rec_status, remark, res1, create_time, modify_time
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from news_channels
+    where channels_id= #{channelsId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from news_channels
+    where channels_id= #{channelsId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bean.NewsChannels">
+    insert into news_channels (
+	channels_id,channels_name,channels_desc,channel_priority,rec_status,remark,res1,create_time,modify_time
+	)
+    values (
+		#{channelsId,jdbcType=BIGINT},
+		#{channelsName,jdbcType=VARCHAR},
+		#{channelsDesc,jdbcType=VARCHAR},
+		#{channelPriority,jdbcType=INTEGER},
+		#{recStatus,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{res1,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP}
+	)
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.NewsChannels" >
+    insert into news_channels
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="channelsId != null " >channels_id,</if>
+		<if test="channelsName != null and channelsName != ''" >channels_name,</if>
+		<if test="channelsDesc != null and channelsDesc != ''" >channels_desc,</if>
+		<if test="channelPriority != null " >channel_priority,</if>
+		<if test="recStatus != null and recStatus != ''" >rec_status,</if>
+		<if test="remark != null and remark != ''" >remark,</if>
+		<if test="res1 != null and res1 != ''" >res1,</if>
+		<if test="createTime != null " >create_time,</if>
+		<if test="modifyTime != null " >modify_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		<if test="channelsId != null ">#{channelsId,jdbcType=BIGINT},</if>
+		<if test="channelsName != null and channelsName != ''">#{channelsName,jdbcType=VARCHAR},</if>
+		<if test="channelsDesc != null and channelsDesc != ''">#{channelsDesc,jdbcType=VARCHAR},</if>
+		<if test="channelPriority != null ">#{channelPriority,jdbcType=INTEGER},</if>
+		<if test="recStatus != null and recStatus != ''">#{recStatus,jdbcType=VARCHAR},</if>
+		<if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+		<if test="res1 != null and res1 != ''">#{res1,jdbcType=VARCHAR},</if>
+		<if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+		<if test="modifyTime != null ">#{modifyTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.NewsChannels" >
+    update news_channels
+    <set >
+      <if test="channelsId != null ">channels_id = #{channelsId,jdbcType=BIGINT},</if>
+      <if test="channelsName != null and channelsName != ''">channels_name = #{channelsName,jdbcType=VARCHAR},</if>
+      <if test="channelsDesc != null and channelsDesc != ''">channels_desc = #{channelsDesc,jdbcType=VARCHAR},</if>
+      <if test="channelPriority != null ">channel_priority = #{channelPriority,jdbcType=INTEGER},</if>
+      <if test="recStatus != null and recStatus != ''">rec_status = #{recStatus,jdbcType=VARCHAR},</if>
+      <if test="remark != null and remark != ''">remark = #{remark,jdbcType=VARCHAR},</if>
+      <if test="res1 != null and res1 != ''">res1 = #{res1,jdbcType=VARCHAR},</if>
+      <if test="createTime != null ">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null ">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where channels_id= #{channelsId,jdbcType=BIGINT}
+  </update>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.bean.NewsChannels" >
+    update news_channels
+    <set>
+      channels_id = #{channelsId,jdbcType=BIGINT},
+      channels_name = #{channelsName,jdbcType=VARCHAR},
+      channels_desc = #{channelsDesc,jdbcType=VARCHAR},
+      channel_priority = #{channelPriority,jdbcType=INTEGER},
+      rec_status = #{recStatus,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      res1 = #{res1,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    </set>
+    where channels_id= #{channelsId,jdbcType=BIGINT}
+  </update>
+ 
+  <sql id="findCondition">
+		<if test="channelsId != null  ">and  channels_id = #{channelsId,jdbcType=BIGINT}</if>
+		<if test="channelsName != null and channelsName != '' ">and  channels_name = #{channelsName,jdbcType=VARCHAR}</if>
+		<if test="channelsDesc != null and channelsDesc != '' ">and  channels_desc = #{channelsDesc,jdbcType=VARCHAR}</if>
+		<if test="channelPriority != null  ">and  channel_priority = #{channelPriority,jdbcType=INTEGER}</if>
+		<if test="recStatus != null and recStatus != '' ">and  rec_status = #{recStatus,jdbcType=VARCHAR}</if>
+		<if test="remark != null and remark != '' ">and  remark = #{remark,jdbcType=VARCHAR}</if>
+		<if test="res1 != null and res1 != '' ">and  res1 = #{res1,jdbcType=VARCHAR}</if>
+		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+  </sql>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.NewsChannels" >
+    select 
+    <include refid="Base_Column_List" />
+    from news_channels
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+	order by create_time desc
+	<if test="model!=null">
+		limit #{model.startRow},#{model.rows}
+	</if>
+  </select>
+  
+  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.NewsChannels" >
+    select count(1)
+    from news_channels
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+  </select>
+</mapper>

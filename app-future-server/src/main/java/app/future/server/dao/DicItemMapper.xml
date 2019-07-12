@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DicItemMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.DicItem" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="dic_item_id" property="dicItemId" jdbcType="VARCHAR" />
+    <result column="dic_item_name" property="dicItemName" jdbcType="VARCHAR" />
+    <result column="dic_type_id" property="dicTypeId" jdbcType="VARCHAR" />
+    <result column="dic_item_desc" property="dicItemDesc" jdbcType="VARCHAR" />
+    <result column="rec_status" property="recStatus" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="res1" property="res1" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dic_item_id, dic_item_name, dic_type_id, dic_item_desc, rec_status, remark, res1, create_time, modify_time
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dic_item
+    where id= #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dic_item
+    where id= #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bean.DicItem">
+    insert into dic_item (
+	id,dic_item_id,dic_item_name,dic_type_id,dic_item_desc,rec_status,remark,res1,create_time,modify_time
+	)
+    values (
+		#{id,jdbcType=BIGINT},
+		#{dicItemId,jdbcType=VARCHAR},
+		#{dicItemName,jdbcType=VARCHAR},
+		#{dicTypeId,jdbcType=VARCHAR},
+		#{dicItemDesc,jdbcType=VARCHAR},
+		#{recStatus,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{res1,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP}
+	)
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.DicItem" >
+    insert into dic_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="id != null " >id,</if>
+		<if test="dicItemId != null and dicItemId != ''" >dic_item_id,</if>
+		<if test="dicItemName != null and dicItemName != ''" >dic_item_name,</if>
+		<if test="dicTypeId != null and dicTypeId != ''" >dic_type_id,</if>
+		<if test="dicItemDesc != null and dicItemDesc != ''" >dic_item_desc,</if>
+		<if test="recStatus != null and recStatus != ''" >rec_status,</if>
+		<if test="remark != null and remark != ''" >remark,</if>
+		<if test="res1 != null and res1 != ''" >res1,</if>
+		<if test="createTime != null " >create_time,</if>
+		<if test="modifyTime != null " >modify_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		<if test="id != null ">#{id,jdbcType=BIGINT},</if>
+		<if test="dicItemId != null and dicItemId != ''">#{dicItemId,jdbcType=VARCHAR},</if>
+		<if test="dicItemName != null and dicItemName != ''">#{dicItemName,jdbcType=VARCHAR},</if>
+		<if test="dicTypeId != null and dicTypeId != ''">#{dicTypeId,jdbcType=VARCHAR},</if>
+		<if test="dicItemDesc != null and dicItemDesc != ''">#{dicItemDesc,jdbcType=VARCHAR},</if>
+		<if test="recStatus != null and recStatus != ''">#{recStatus,jdbcType=VARCHAR},</if>
+		<if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+		<if test="res1 != null and res1 != ''">#{res1,jdbcType=VARCHAR},</if>
+		<if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+		<if test="modifyTime != null ">#{modifyTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.DicItem" >
+    update dic_item
+    <set >
+      <if test="id != null ">id = #{id,jdbcType=BIGINT},</if>
+      <if test="dicItemId != null and dicItemId != ''">dic_item_id = #{dicItemId,jdbcType=VARCHAR},</if>
+      <if test="dicItemName != null and dicItemName != ''">dic_item_name = #{dicItemName,jdbcType=VARCHAR},</if>
+      <if test="dicTypeId != null and dicTypeId != ''">dic_type_id = #{dicTypeId,jdbcType=VARCHAR},</if>
+      <if test="dicItemDesc != null and dicItemDesc != ''">dic_item_desc = #{dicItemDesc,jdbcType=VARCHAR},</if>
+      <if test="recStatus != null and recStatus != ''">rec_status = #{recStatus,jdbcType=VARCHAR},</if>
+      <if test="remark != null and remark != ''">remark = #{remark,jdbcType=VARCHAR},</if>
+      <if test="res1 != null and res1 != ''">res1 = #{res1,jdbcType=VARCHAR},</if>
+      <if test="createTime != null ">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null ">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where id= #{id,jdbcType=BIGINT}
+  </update>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.bean.DicItem" >
+    update dic_item
+    <set>
+      id = #{id,jdbcType=BIGINT},
+      dic_item_id = #{dicItemId,jdbcType=VARCHAR},
+      dic_item_name = #{dicItemName,jdbcType=VARCHAR},
+      dic_type_id = #{dicTypeId,jdbcType=VARCHAR},
+      dic_item_desc = #{dicItemDesc,jdbcType=VARCHAR},
+      rec_status = #{recStatus,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      res1 = #{res1,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    </set>
+    where id= #{id,jdbcType=BIGINT}
+  </update>
+ 
+  <sql id="findCondition">
+		<if test="id != null  ">and  id = #{id,jdbcType=BIGINT}</if>
+		<if test="dicItemId != null and dicItemId != '' ">and  dic_item_id = #{dicItemId,jdbcType=VARCHAR}</if>
+		<if test="dicItemName != null and dicItemName != '' ">and  dic_item_name = #{dicItemName,jdbcType=VARCHAR}</if>
+		<if test="dicTypeId != null and dicTypeId != '' ">and  dic_type_id = #{dicTypeId,jdbcType=VARCHAR}</if>
+		<if test="dicItemDesc != null and dicItemDesc != '' ">and  dic_item_desc = #{dicItemDesc,jdbcType=VARCHAR}</if>
+		<if test="recStatus != null and recStatus != '' ">and  rec_status = #{recStatus,jdbcType=VARCHAR}</if>
+		<if test="remark != null and remark != '' ">and  remark = #{remark,jdbcType=VARCHAR}</if>
+		<if test="res1 != null and res1 != '' ">and  res1 = #{res1,jdbcType=VARCHAR}</if>
+		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+  </sql>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.DicItem" >
+    select 
+    <include refid="Base_Column_List" />
+    from dic_item
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+	order by create_time desc
+	<if test="model!=null">
+		limit #{model.startRow},#{model.rows}
+	</if>
+  </select>
+  
+  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.DicItem" >
+    select count(1)
+    from dic_item
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+  </select>
+</mapper>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UsersAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.UsersAccount" >
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_passwd" property="userPasswd" jdbcType="VARCHAR" />
+    <result column="user_account_type" property="userAccountType" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_age" property="userAge" jdbcType="INTEGER" />
+    <result column="idcard_no" property="idcardNo" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="account_status" property="accountStatus" jdbcType="VARCHAR" />
+    <result column="user_head_img" property="userHeadImg" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="register_resource" property="registerResource" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="res1" property="res1" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_account, user_passwd, user_account_type, user_name, user_nickname, user_age, idcard_no, user_email, user_phone, account_status, 
+user_head_img, education, profession, province, city, area, addr, register_resource, remark, res1, 
+create_time, modify_time
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from users_account
+    where user_id= #{userId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from users_account
+    where user_id= #{userId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bean.UsersAccount">
+    insert into users_account (
+	user_id,user_account,user_passwd,user_account_type,user_name,user_nickname,user_age,idcard_no,user_email,user_phone,account_status,user_head_img,education,profession,province,city,area,addr,register_resource,remark,res1,create_time,modify_time
+	)
+    values (
+		#{userId,jdbcType=BIGINT},
+		#{userAccount,jdbcType=VARCHAR},
+		#{userPasswd,jdbcType=VARCHAR},
+		#{userAccountType,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{userNickname,jdbcType=VARCHAR},
+		#{userAge,jdbcType=INTEGER},
+		#{idcardNo,jdbcType=VARCHAR},
+		#{userEmail,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR},
+		#{accountStatus,jdbcType=VARCHAR},
+		#{userHeadImg,jdbcType=VARCHAR},
+		#{education,jdbcType=VARCHAR},
+		#{profession,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{area,jdbcType=VARCHAR},
+		#{addr,jdbcType=VARCHAR},
+		#{registerResource,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{res1,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP}
+	)
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.UsersAccount" >
+    insert into users_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="userId != null " >user_id,</if>
+		<if test="userAccount != null and userAccount != ''" >user_account,</if>
+		<if test="userPasswd != null and userPasswd != ''" >user_passwd,</if>
+		<if test="userAccountType != null and userAccountType != ''" >user_account_type,</if>
+		<if test="userName != null and userName != ''" >user_name,</if>
+		<if test="userNickname != null and userNickname != ''" >user_nickname,</if>
+		<if test="userAge != null " >user_age,</if>
+		<if test="idcardNo != null and idcardNo != ''" >idcard_no,</if>
+		<if test="userEmail != null and userEmail != ''" >user_email,</if>
+		<if test="userPhone != null and userPhone != ''" >user_phone,</if>
+		<if test="accountStatus != null and accountStatus != ''" >account_status,</if>
+		<if test="userHeadImg != null and userHeadImg != ''" >user_head_img,</if>
+		<if test="education != null and education != ''" >education,</if>
+		<if test="profession != null and profession != ''" >profession,</if>
+		<if test="province != null and province != ''" >province,</if>
+		<if test="city != null and city != ''" >city,</if>
+		<if test="area != null and area != ''" >area,</if>
+		<if test="addr != null and addr != ''" >addr,</if>
+		<if test="registerResource != null and registerResource != ''" >register_resource,</if>
+		<if test="remark != null and remark != ''" >remark,</if>
+		<if test="res1 != null and res1 != ''" >res1,</if>
+		<if test="createTime != null " >create_time,</if>
+		<if test="modifyTime != null " >modify_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		<if test="userId != null ">#{userId,jdbcType=BIGINT},</if>
+		<if test="userAccount != null and userAccount != ''">#{userAccount,jdbcType=VARCHAR},</if>
+		<if test="userPasswd != null and userPasswd != ''">#{userPasswd,jdbcType=VARCHAR},</if>
+		<if test="userAccountType != null and userAccountType != ''">#{userAccountType,jdbcType=VARCHAR},</if>
+		<if test="userName != null and userName != ''">#{userName,jdbcType=VARCHAR},</if>
+		<if test="userNickname != null and userNickname != ''">#{userNickname,jdbcType=VARCHAR},</if>
+		<if test="userAge != null ">#{userAge,jdbcType=INTEGER},</if>
+		<if test="idcardNo != null and idcardNo != ''">#{idcardNo,jdbcType=VARCHAR},</if>
+		<if test="userEmail != null and userEmail != ''">#{userEmail,jdbcType=VARCHAR},</if>
+		<if test="userPhone != null and userPhone != ''">#{userPhone,jdbcType=VARCHAR},</if>
+		<if test="accountStatus != null and accountStatus != ''">#{accountStatus,jdbcType=VARCHAR},</if>
+		<if test="userHeadImg != null and userHeadImg != ''">#{userHeadImg,jdbcType=VARCHAR},</if>
+		<if test="education != null and education != ''">#{education,jdbcType=VARCHAR},</if>
+		<if test="profession != null and profession != ''">#{profession,jdbcType=VARCHAR},</if>
+		<if test="province != null and province != ''">#{province,jdbcType=VARCHAR},</if>
+		<if test="city != null and city != ''">#{city,jdbcType=VARCHAR},</if>
+		<if test="area != null and area != ''">#{area,jdbcType=VARCHAR},</if>
+		<if test="addr != null and addr != ''">#{addr,jdbcType=VARCHAR},</if>
+		<if test="registerResource != null and registerResource != ''">#{registerResource,jdbcType=VARCHAR},</if>
+		<if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+		<if test="res1 != null and res1 != ''">#{res1,jdbcType=VARCHAR},</if>
+		<if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+		<if test="modifyTime != null ">#{modifyTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.UsersAccount" >
+    update users_account
+    <set >
+      <if test="userId != null ">user_id = #{userId,jdbcType=BIGINT},</if>
+      <if test="userAccount != null and userAccount != ''">user_account = #{userAccount,jdbcType=VARCHAR},</if>
+      <if test="userPasswd != null and userPasswd != ''">user_passwd = #{userPasswd,jdbcType=VARCHAR},</if>
+      <if test="userAccountType != null and userAccountType != ''">user_account_type = #{userAccountType,jdbcType=VARCHAR},</if>
+      <if test="userName != null and userName != ''">user_name = #{userName,jdbcType=VARCHAR},</if>
+      <if test="userNickname != null and userNickname != ''">user_nickname = #{userNickname,jdbcType=VARCHAR},</if>
+      <if test="userAge != null ">user_age = #{userAge,jdbcType=INTEGER},</if>
+      <if test="idcardNo != null and idcardNo != ''">idcard_no = #{idcardNo,jdbcType=VARCHAR},</if>
+      <if test="userEmail != null and userEmail != ''">user_email = #{userEmail,jdbcType=VARCHAR},</if>
+      <if test="userPhone != null and userPhone != ''">user_phone = #{userPhone,jdbcType=VARCHAR},</if>
+      <if test="accountStatus != null and accountStatus != ''">account_status = #{accountStatus,jdbcType=VARCHAR},</if>
+      <if test="userHeadImg != null and userHeadImg != ''">user_head_img = #{userHeadImg,jdbcType=VARCHAR},</if>
+      <if test="education != null and education != ''">education = #{education,jdbcType=VARCHAR},</if>
+      <if test="profession != null and profession != ''">profession = #{profession,jdbcType=VARCHAR},</if>
+      <if test="province != null and province != ''">province = #{province,jdbcType=VARCHAR},</if>
+      <if test="city != null and city != ''">city = #{city,jdbcType=VARCHAR},</if>
+      <if test="area != null and area != ''">area = #{area,jdbcType=VARCHAR},</if>
+      <if test="addr != null and addr != ''">addr = #{addr,jdbcType=VARCHAR},</if>
+      <if test="registerResource != null and registerResource != ''">register_resource = #{registerResource,jdbcType=VARCHAR},</if>
+      <if test="remark != null and remark != ''">remark = #{remark,jdbcType=VARCHAR},</if>
+      <if test="res1 != null and res1 != ''">res1 = #{res1,jdbcType=VARCHAR},</if>
+      <if test="createTime != null ">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null ">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where user_id= #{userId,jdbcType=BIGINT}
+  </update>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.bean.UsersAccount" >
+    update users_account
+    <set>
+      user_id = #{userId,jdbcType=BIGINT},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      user_passwd = #{userPasswd,jdbcType=VARCHAR},
+      user_account_type = #{userAccountType,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_age = #{userAge,jdbcType=INTEGER},
+      idcard_no = #{idcardNo,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      account_status = #{accountStatus,jdbcType=VARCHAR},
+      user_head_img = #{userHeadImg,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      register_resource = #{registerResource,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      res1 = #{res1,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    </set>
+    where user_id= #{userId,jdbcType=BIGINT}
+  </update>
+ 
+  <sql id="findCondition">
+		<if test="userId != null  ">and  user_id = #{userId,jdbcType=BIGINT}</if>
+		<if test="userAccount != null and userAccount != '' ">and  user_account = #{userAccount,jdbcType=VARCHAR}</if>
+		<if test="userPasswd != null and userPasswd != '' ">and  user_passwd = #{userPasswd,jdbcType=VARCHAR}</if>
+		<if test="userAccountType != null and userAccountType != '' ">and  user_account_type = #{userAccountType,jdbcType=VARCHAR}</if>
+		<if test="userName != null and userName != '' ">and  user_name = #{userName,jdbcType=VARCHAR}</if>
+		<if test="userNickname != null and userNickname != '' ">and  user_nickname = #{userNickname,jdbcType=VARCHAR}</if>
+		<if test="userAge != null  ">and  user_age = #{userAge,jdbcType=INTEGER}</if>
+		<if test="idcardNo != null and idcardNo != '' ">and  idcard_no = #{idcardNo,jdbcType=VARCHAR}</if>
+		<if test="userEmail != null and userEmail != '' ">and  user_email = #{userEmail,jdbcType=VARCHAR}</if>
+		<if test="userPhone != null and userPhone != '' ">and  user_phone = #{userPhone,jdbcType=VARCHAR}</if>
+		<if test="accountStatus != null and accountStatus != '' ">and  account_status = #{accountStatus,jdbcType=VARCHAR}</if>
+		<if test="userHeadImg != null and userHeadImg != '' ">and  user_head_img = #{userHeadImg,jdbcType=VARCHAR}</if>
+		<if test="education != null and education != '' ">and  education = #{education,jdbcType=VARCHAR}</if>
+		<if test="profession != null and profession != '' ">and  profession = #{profession,jdbcType=VARCHAR}</if>
+		<if test="province != null and province != '' ">and  province = #{province,jdbcType=VARCHAR}</if>
+		<if test="city != null and city != '' ">and  city = #{city,jdbcType=VARCHAR}</if>
+		<if test="area != null and area != '' ">and  area = #{area,jdbcType=VARCHAR}</if>
+		<if test="addr != null and addr != '' ">and  addr = #{addr,jdbcType=VARCHAR}</if>
+		<if test="registerResource != null and registerResource != '' ">and  register_resource = #{registerResource,jdbcType=VARCHAR}</if>
+		<if test="remark != null and remark != '' ">and  remark = #{remark,jdbcType=VARCHAR}</if>
+		<if test="res1 != null and res1 != '' ">and  res1 = #{res1,jdbcType=VARCHAR}</if>
+		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+  </sql>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.UsersAccount" >
+    select 
+    <include refid="Base_Column_List" />
+    from users_account
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+	order by create_time desc
+	<if test="model!=null">
+		limit #{model.startRow},#{model.rows}
+	</if>
+  </select>
+  
+  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.UsersAccount" >
+    select count(1)
+    from users_account
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+  </select>
+</mapper>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.NewsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.NewsInfo" >
+    <result column="news_id" property="newsId" jdbcType="BIGINT" />
+    <result column="news_title" property="newsTitle" jdbcType="VARCHAR" />
+    <result column="news_type" property="newsType" jdbcType="BIGINT" />
+    <result column="news_resource_id" property="newsResourceId" jdbcType="BIGINT" />
+    <result column="news_link" property="newsLink" jdbcType="VARCHAR" />
+    <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+    <result column="rec_status" property="recStatus" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="res1" property="res1" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    news_id, news_title, news_type, news_resource_id, news_link, resource_type, rec_status, remark, res1, create_time, modify_time
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from news_info
+    where news_id= #{newsId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from news_info
+    where news_id= #{newsId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bean.NewsInfo">
+    insert into news_info (
+	news_id,news_title,news_type,news_resource_id,news_link,resource_type,rec_status,remark,res1,create_time,modify_time
+	)
+    values (
+		#{newsId,jdbcType=BIGINT},
+		#{newsTitle,jdbcType=VARCHAR},
+		#{newsType,jdbcType=BIGINT},
+		#{newsResourceId,jdbcType=BIGINT},
+		#{newsLink,jdbcType=VARCHAR},
+		#{resourceType,jdbcType=VARCHAR},
+		#{recStatus,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{res1,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP}
+	)
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.NewsInfo" >
+    insert into news_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="newsId != null " >news_id,</if>
+		<if test="newsTitle != null and newsTitle != ''" >news_title,</if>
+		<if test="newsType != null " >news_type,</if>
+		<if test="newsResourceId != null " >news_resource_id,</if>
+		<if test="newsLink != null and newsLink != ''" >news_link,</if>
+		<if test="resourceType != null and resourceType != ''" >resource_type,</if>
+		<if test="recStatus != null and recStatus != ''" >rec_status,</if>
+		<if test="remark != null and remark != ''" >remark,</if>
+		<if test="res1 != null and res1 != ''" >res1,</if>
+		<if test="createTime != null " >create_time,</if>
+		<if test="modifyTime != null " >modify_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		<if test="newsId != null ">#{newsId,jdbcType=BIGINT},</if>
+		<if test="newsTitle != null and newsTitle != ''">#{newsTitle,jdbcType=VARCHAR},</if>
+		<if test="newsType != null ">#{newsType,jdbcType=BIGINT},</if>
+		<if test="newsResourceId != null ">#{newsResourceId,jdbcType=BIGINT},</if>
+		<if test="newsLink != null and newsLink != ''">#{newsLink,jdbcType=VARCHAR},</if>
+		<if test="resourceType != null and resourceType != ''">#{resourceType,jdbcType=VARCHAR},</if>
+		<if test="recStatus != null and recStatus != ''">#{recStatus,jdbcType=VARCHAR},</if>
+		<if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
+		<if test="res1 != null and res1 != ''">#{res1,jdbcType=VARCHAR},</if>
+		<if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+		<if test="modifyTime != null ">#{modifyTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.NewsInfo" >
+    update news_info
+    <set >
+      <if test="newsId != null ">news_id = #{newsId,jdbcType=BIGINT},</if>
+      <if test="newsTitle != null and newsTitle != ''">news_title = #{newsTitle,jdbcType=VARCHAR},</if>
+      <if test="newsType != null ">news_type = #{newsType,jdbcType=BIGINT},</if>
+      <if test="newsResourceId != null ">news_resource_id = #{newsResourceId,jdbcType=BIGINT},</if>
+      <if test="newsLink != null and newsLink != ''">news_link = #{newsLink,jdbcType=VARCHAR},</if>
+      <if test="resourceType != null and resourceType != ''">resource_type = #{resourceType,jdbcType=VARCHAR},</if>
+      <if test="recStatus != null and recStatus != ''">rec_status = #{recStatus,jdbcType=VARCHAR},</if>
+      <if test="remark != null and remark != ''">remark = #{remark,jdbcType=VARCHAR},</if>
+      <if test="res1 != null and res1 != ''">res1 = #{res1,jdbcType=VARCHAR},</if>
+      <if test="createTime != null ">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null ">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where news_id= #{newsId,jdbcType=BIGINT}
+  </update>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.bean.NewsInfo" >
+    update news_info
+    <set>
+      news_id = #{newsId,jdbcType=BIGINT},
+      news_title = #{newsTitle,jdbcType=VARCHAR},
+      news_type = #{newsType,jdbcType=BIGINT},
+      news_resource_id = #{newsResourceId,jdbcType=BIGINT},
+      news_link = #{newsLink,jdbcType=VARCHAR},
+      resource_type = #{resourceType,jdbcType=VARCHAR},
+      rec_status = #{recStatus,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      res1 = #{res1,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    </set>
+    where news_id= #{newsId,jdbcType=BIGINT}
+  </update>
+ 
+  <sql id="findCondition">
+		<if test="newsId != null  ">and  news_id = #{newsId,jdbcType=BIGINT}</if>
+		<if test="newsTitle != null and newsTitle != '' ">and  news_title = #{newsTitle,jdbcType=VARCHAR}</if>
+		<if test="newsType != null  ">and  news_type = #{newsType,jdbcType=BIGINT}</if>
+		<if test="newsResourceId != null  ">and  news_resource_id = #{newsResourceId,jdbcType=BIGINT}</if>
+		<if test="newsLink != null and newsLink != '' ">and  news_link = #{newsLink,jdbcType=VARCHAR}</if>
+		<if test="resourceType != null and resourceType != '' ">and  resource_type = #{resourceType,jdbcType=VARCHAR}</if>
+		<if test="recStatus != null and recStatus != '' ">and  rec_status = #{recStatus,jdbcType=VARCHAR}</if>
+		<if test="remark != null and remark != '' ">and  remark = #{remark,jdbcType=VARCHAR}</if>
+		<if test="res1 != null and res1 != '' ">and  res1 = #{res1,jdbcType=VARCHAR}</if>
+		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+		<!-- 包含新闻类型集合 -->
+		<if test="newsTypeList != null ">
+			and news_type In 
+			<foreach item="item" index="index" collection="newsTypeList" open="(" separator="," close=")">  
+				#{item,jdbcType=Long}  
+			</foreach>
+		</if>
+  </sql>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.NewsInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from news_info
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+	order by create_time desc
+	<if test="model!=null">
+		limit #{model.startRow},#{model.rows}
+	</if>
+  </select>
+  
+  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.NewsInfo" >
+    select count(1)
+    from news_info
+    <where>
+	  <include refid="findCondition"/>
+	</where>
+  </select>
+</mapper>

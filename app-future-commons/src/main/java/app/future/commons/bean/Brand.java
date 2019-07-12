@@ -1,9 +1,14 @@
 package app.future.commons.bean;
 
+import java.io.Serializable;
+
 import app.future.commons.base.PageModel;
 
-public class Brand {
+public class Brand implements Serializable{
 	
+	/**
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */

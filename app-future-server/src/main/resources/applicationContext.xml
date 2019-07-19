@@ -17,14 +17,66 @@
           http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
           >
 
+	<bean id="sysConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="locations">
+			<value>classpath:sysConfig.properties</value>
+		</property>
+	</bean>
+	<!-- configure file import-->
+	<bean id="propertyConfigurer"
+		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true"></property>
+		<property name="locations">
+			<list>
+				<value>classpath:sysConfig.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- datasource defined -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		  destroy-method="close">
+		<property name="driverClass" value="${db.connection.driver_class}" />
+		<property name="jdbcUrl" value="${db.connection.url}" />
+		<property name="user" value="${db.connection.username}" />
+		<property name="password" value="${db.connection.password}" />
+		<property name="maxPoolSize" value="${c3p0.max_size}" />
+		<property name="minPoolSize" value="${c3p0.min_size}" />
+		<property name="initialPoolSize" value="${c3p0.initial_size}" />
+		<property name="maxIdleTime" value="${c3p0.timeout}" />
+		<property name="maxStatements" value="${c3p0.max_statements}" />
+		<property name="checkoutTimeout" value="${c3p0.checkoutTimeout}" />
+		<property name="acquireIncrement" value="${c3p0.acquire_increment}" />
+		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}" />
+		<property name="acquireRetryDelay" value="${c3p0.acquireRetryDelay}" />
+		<property name="idleConnectionTestPeriod" value="${c3p0.idle_test_period}" />
+	</bean>
+
+	<!-- 由Spring来管理事务 -->
+	<!--<bean id="transactionManager"-->
+		  <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+		<!--<property name="dataSource" ref="dataSource" />-->
+	<!--</bean>-->
+	<!-- 使用annotation注解方式配置事务 -->
+	<!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+
 		<!-- 自动扫描service包完成注解装配 -->
 	<context:component-scan base-package="app.future.server.services"/>
-	<context:component-scan base-package="app.future.server.dao"/>
+	<context:component-scan base-package="app.future.server.biz"/>
+	<!--<context:component-scan base-package="app.future.server.dao"/>-->
 	<!-- 扫描所有mapper,在本目录中新增的Mapper不再需要配置配置文件 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!--basePackage指定要扫描的包，在此包之下的映射器都会被
 				搜索到。可指定多个包，包与包之间用逗号或分号分隔-->
 		<property name="basePackage" value="app.future.server.dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
+	</bean>
+
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 当接口名与xml名相同时可省略此配置 -->
+		<property name="mapperLocations" value="classpath:mappers/*.xml" />
 	</bean>
  <!-- ===================== 单点登录 start... ====================== -->
  <!-- 

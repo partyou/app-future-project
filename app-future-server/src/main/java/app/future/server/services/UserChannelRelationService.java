@@ -3,34 +3,41 @@ package app.future.server.services;
 import app.future.commons.base.PageData;
 import app.future.commons.base.PageModel;
 import app.future.commons.bean.UserChannelRelation;
+import app.future.commons.services.IUserChannelRelationService;
 import app.future.server.dao.UserChannelRelationMapper;
 import com.alibaba.dubbo.common.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class UserChannelRelationService{
+@Service
+public class UserChannelRelationService implements IUserChannelRelationService {
 
 	@Autowired
 	private UserChannelRelationMapper userChannelRelationMapper;
 	
 	
-	public int insert(UserChannelRelation bean) throws Exception {
+	@Override
+    public int insert(UserChannelRelation bean) throws Exception {
 		return userChannelRelationMapper.insert(bean);
 	}
 	
 	
-	public int update(UserChannelRelation bean) throws Exception {
+	@Override
+    public int update(UserChannelRelation bean) throws Exception {
 		return userChannelRelationMapper.updateByPrimaryKeySelective(bean);
 	}
 
 	
-	public List<UserChannelRelation> find(UserChannelRelation bean) throws Exception {
+	@Override
+    public List<UserChannelRelation> find(UserChannelRelation bean) throws Exception {
 		return userChannelRelationMapper.find(bean);
 	}
 
 	
-	public long findTotal(UserChannelRelation bean) throws Exception {
+	@Override
+    public long findTotal(UserChannelRelation bean) throws Exception {
 		Long result = 0L;
 		if (bean != null) {
 			result = userChannelRelationMapper.findTotal(bean);
@@ -39,19 +46,22 @@ public class UserChannelRelationService{
 	}
 	
 	
-	public PageData<UserChannelRelation> findByPage(UserChannelRelation bean, PageModel model)
+	@Override
+    public PageData<UserChannelRelation> findByPage(UserChannelRelation bean, PageModel model)
 			throws Exception {
 		bean.setModel(model);
 		return PageData.setData(findTotal(bean), find(bean));
 	}
 	
 	
+    @Override
     public UserChannelRelation findById(Long id) throws Exception {
         return userChannelRelationMapper.selectByPrimaryKey(id);
     }
 
 	
-	public UserChannelRelation findObject(UserChannelRelation bean) throws Exception {
+	@Override
+    public UserChannelRelation findObject(UserChannelRelation bean) throws Exception {
 		UserChannelRelation result = null;
 		if (bean!=null) {
 			PageModel model = new PageModel(1, 1);

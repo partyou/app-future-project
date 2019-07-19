@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dao.NewsChannelsMapper" >
-  <resultMap id="BaseResultMap" type="com.bean.NewsChannels" >
+<mapper namespace="app.future.server.dao.NewsChannelsMapper" >
+  <resultMap id="BaseResultMap" type="app.future.commons.bean.NewsChannels" >
     <result column="channels_id" property="channelsId" jdbcType="BIGINT" />
     <result column="channels_name" property="channelsName" jdbcType="VARCHAR" />
     <result column="channels_desc" property="channelsDesc" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
     where channels_id= #{channelsId,jdbcType=BIGINT}
   </delete>
   
-  <insert id="insert" parameterType="com.bean.NewsChannels">
+  <insert id="insert" parameterType="app.future.commons.bean.NewsChannels">
     insert into news_channels (
 	channels_id,channels_name,channels_desc,channel_priority,rec_status,remark,res1,create_time,modify_time
 	)
@@ -44,7 +44,7 @@
 		#{modifyTime,jdbcType=TIMESTAMP}
 	)
   </insert>
-  <insert id="insertSelective" parameterType="com.bean.NewsChannels" >
+  <insert id="insertSelective" parameterType="app.future.commons.bean.NewsChannels" >
     insert into news_channels
     <trim prefix="(" suffix=")" suffixOverrides="," >
 		<if test="channelsId != null " >channels_id,</if>
@@ -70,7 +70,7 @@
     </trim>
   </insert>
   
-  <update id="updateByPrimaryKeySelective" parameterType="com.bean.NewsChannels" >
+  <update id="updateByPrimaryKeySelective" parameterType="app.future.commons.bean.NewsChannels" >
     update news_channels
     <set >
       <if test="channelsId != null ">channels_id = #{channelsId,jdbcType=BIGINT},</if>
@@ -86,7 +86,7 @@
     where channels_id= #{channelsId,jdbcType=BIGINT}
   </update>
  
-  <update id="updateByPrimaryKey" parameterType="com.bean.NewsChannels" >
+  <update id="updateByPrimaryKey" parameterType="app.future.commons.bean.NewsChannels" >
     update news_channels
     <set>
       channels_id = #{channelsId,jdbcType=BIGINT},
@@ -113,7 +113,7 @@
 		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
 		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
   </sql>
-  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.NewsChannels" >
+  <select id="find" resultMap="BaseResultMap" parameterType="app.future.commons.bean.NewsChannels" >
     select 
     <include refid="Base_Column_List" />
     from news_channels
@@ -126,7 +126,7 @@
 	</if>
   </select>
   
-  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.NewsChannels" >
+  <select id="findTotal" resultType="java.lang.Long" parameterType="app.future.commons.bean.NewsChannels" >
     select count(1)
     from news_channels
     <where>

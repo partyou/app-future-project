@@ -1,7 +1,9 @@
 package app.future.server.services;
 
+
 import app.future.commons.base.PageModel;
 import app.future.commons.bean.Card;
+import app.future.commons.services.ICardService;
 import app.future.server.dao.CardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class CardService {
+public class CardService implements ICardService {
 
 	public static List<Card> cardList = new ArrayList<Card>();
 

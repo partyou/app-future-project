@@ -1,0 +1,48 @@
+@charset 'UTF-8';
+body
+{
+    max-width: none; 
+    margin: 0;
+}
+.header_bg
+{
+	height: 44px;
+    position: relative;
+    background: #d43d3d;
+}
+.header_bg .header-txt
+{
+	width: 100%;
+	background-size: 249px !important;
+	width: 249px;
+	padding-left: 160px;
+    line-height: 2;
+    font-family: cursive;
+    font-size: 21px;
+}
+.top_nav {
+	
+}
+.top_menu_bar .top_menu_list li
+{
+    display: inline-block;
+
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    height: 1.5rem;
+    padding: 0 .5rem;
+
+    text-decoration: none;
+
+    color: #666;
+    border-bottom: .04267rem solid transparent;
+}
+.top_menu_bar .top_menu_list li.on
+{
+    color: #ce3533;
+    border-bottom: .04267rem solid #ce3533;
+}
+.top_menu_bar .top_menu_list li:last-child
+{
+    margin-right: .32rem;
+}

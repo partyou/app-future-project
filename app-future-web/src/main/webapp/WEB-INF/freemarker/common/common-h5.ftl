@@ -1,8 +1,8 @@
 <meta name="keywords" content="登录、我的帐户、我的资产、持仓详情、交易记录、基金定投、资金划转、分红设置" />
 <meta name="description" content="帐户前端包括的功能有登录、我的帐户、我的资产、持仓详情、交易记录、基金定投、资金划转、分红设置以及基金理财开户和股票开户等。">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<#assign staticPrefix="http://localhost:8080/testFreemarker">
-<#assign globalPrefix="http://localhost:8080/testFreemarker">
+<#assign staticPrefix="http://localhost:8080/app-future-web">
+<#assign globalPrefix="http://localhost:8080/app-future-web">
 <link rel="shortcut icon" type="image/x-icon" href="//static.touker.com/hbec/favicon.ico"/>
 <meta content="yes" name="apple-mobile-web-app-capable">
 <!-- 全屏显示 -->

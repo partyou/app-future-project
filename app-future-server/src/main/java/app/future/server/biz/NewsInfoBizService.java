@@ -5,15 +5,14 @@ import app.future.commons.bean.ChannelNewsTypeRelation;
 import app.future.commons.bean.NewsInfo;
 import app.future.commons.bean.UserNewTypeRelation;
 import app.future.commons.biz.INewsInfoBizService;
-
 import app.future.server.services.ChannelNewsTypeRelationService;
 import app.future.server.services.NewsInfoService;
 import app.future.server.services.UserNewTypeRelationService;
 import com.alibaba.dubbo.common.utils.CollectionUtils;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
  * @version: 1.0
  * @modify: 
  */
-@Service("newsInfoBizService")
+@Service
 public class NewsInfoBizService implements INewsInfoBizService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());

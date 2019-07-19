@@ -2,10 +2,12 @@ package app.future.server.biz;
 
 import app.future.commons.bean.NewsChannels;
 import app.future.commons.bean.UserChannelRelation;
+import app.future.commons.biz.INewsChannelsBizService;
 import app.future.commons.constants.CommonConstant;
 import app.future.server.services.NewsChannelsService;
 import app.future.server.services.UserChannelRelationService;
 import com.alibaba.dubbo.common.utils.CollectionUtils;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsChannelsBizService implements app.future.commons.biz.INewsChannelsBizService {
+@Service
+public class NewsChannelsBizService implements INewsChannelsBizService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired

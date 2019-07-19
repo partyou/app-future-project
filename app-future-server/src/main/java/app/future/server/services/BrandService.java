@@ -1,15 +1,18 @@
 package app.future.server.services;
 
+
 import app.future.commons.base.PageModel;
 import app.future.commons.bean.Brand;
 import app.future.commons.services.IBrandService;
 import app.future.server.dao.BrandMapper;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class BrandService implements IBrandService{
 
 		@Autowired
@@ -27,7 +30,7 @@ public class BrandService implements IBrandService{
 
 
 		public Map<String, Object> findByPage(Brand bean,
-											  PageModel model) throws Exception {
+				PageModel model) throws Exception {
 			bean.setModel(model);
 			Long total = findTotal(bean);
 			List<Brand> list = find(bean);

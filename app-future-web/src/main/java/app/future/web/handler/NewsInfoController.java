@@ -7,7 +7,7 @@ import app.future.commons.bean.NewsInfo;
 import app.future.commons.biz.INewsChannelsBizService;
 import app.future.commons.biz.INewsInfoBizService;
 import app.future.commons.constants.CommonConstant;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +19,9 @@ import java.util.List;
 @RequestMapping("news")
 public class NewsInfoController extends BaseController {
 
-	@Autowired
+	@Reference
 	private INewsChannelsBizService newsChannelsBizService;
-	@Autowired
+	@Reference
 	private INewsInfoBizService newsInfoBizService;
 	/**
 	 * 页面跳转

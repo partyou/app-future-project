@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dao.DicTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.bean.DicType" >
-    <result column="dic_type_id" property="dicTypeId" jdbcType="VARCHAR" />
-    <result column="dic_type_name" property="dicTypeName" jdbcType="VARCHAR" />
-    <result column="dic_type_desc" property="dicTypeDesc" jdbcType="VARCHAR" />
-    <result column="parent_type_id" property="parentTypeId" jdbcType="VARCHAR" />
+<mapper namespace="app.future.server.dao.NewsTypeMapper" >
+  <resultMap id="BaseResultMap" type="app.future.commons.bean.NewsType" >
+    <result column="news_type_id" property="newsTypeId" jdbcType="BIGINT" />
+    <result column="news_type_name" property="newsTypeName" jdbcType="VARCHAR" />
+    <result column="news_type_desc" property="newsTypeDesc" jdbcType="VARCHAR" />
     <result column="rec_status" property="recStatus" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="res1" property="res1" jdbcType="VARCHAR" />
@@ -13,30 +12,29 @@
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    dic_type_id, dic_type_name, dic_type_desc, parent_type_id, rec_status, remark, res1, create_time, modify_time
+    news_type_id, news_type_name, news_type_desc, rec_status, remark, res1, create_time, modify_time
   </sql>
  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from dic_type
-    where dic_type_id= #{dicTypeId,jdbcType=VARCHAR}
+    from news_type
+    where news_type_id= #{newsTypeId,jdbcType=BIGINT}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from dic_type
-    where dic_type_id= #{dicTypeId,jdbcType=VARCHAR}
+    delete from news_type
+    where news_type_id= #{newsTypeId,jdbcType=BIGINT}
   </delete>
   
-  <insert id="insert" parameterType="com.bean.DicType">
-    insert into dic_type (
-	dic_type_id,dic_type_name,dic_type_desc,parent_type_id,rec_status,remark,res1,create_time,modify_time
+  <insert id="insert" parameterType="app.future.commons.bean.NewsType">
+    insert into news_type (
+	news_type_id,news_type_name,news_type_desc,rec_status,remark,res1,create_time,modify_time
 	)
     values (
-		#{dicTypeId,jdbcType=VARCHAR},
-		#{dicTypeName,jdbcType=VARCHAR},
-		#{dicTypeDesc,jdbcType=VARCHAR},
-		#{parentTypeId,jdbcType=VARCHAR},
+		#{newsTypeId,jdbcType=BIGINT},
+		#{newsTypeName,jdbcType=VARCHAR},
+		#{newsTypeDesc,jdbcType=VARCHAR},
 		#{recStatus,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR},
 		#{res1,jdbcType=VARCHAR},
@@ -44,13 +42,12 @@
 		#{modifyTime,jdbcType=TIMESTAMP}
 	)
   </insert>
-  <insert id="insertSelective" parameterType="com.bean.DicType" >
-    insert into dic_type
+  <insert id="insertSelective" parameterType="app.future.commons.bean.NewsType" >
+    insert into news_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-		<if test="dicTypeId != null and dicTypeId != ''" >dic_type_id,</if>
-		<if test="dicTypeName != null and dicTypeName != ''" >dic_type_name,</if>
-		<if test="dicTypeDesc != null and dicTypeDesc != ''" >dic_type_desc,</if>
-		<if test="parentTypeId != null and parentTypeId != ''" >parent_type_id,</if>
+		<if test="newsTypeId != null " >news_type_id,</if>
+		<if test="newsTypeName != null and newsTypeName != ''" >news_type_name,</if>
+		<if test="newsTypeDesc != null and newsTypeDesc != ''" >news_type_desc,</if>
 		<if test="recStatus != null and recStatus != ''" >rec_status,</if>
 		<if test="remark != null and remark != ''" >remark,</if>
 		<if test="res1 != null and res1 != ''" >res1,</if>
@@ -58,10 +55,9 @@
 		<if test="modifyTime != null " >modify_time,</if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-		<if test="dicTypeId != null and dicTypeId != ''">#{dicTypeId,jdbcType=VARCHAR},</if>
-		<if test="dicTypeName != null and dicTypeName != ''">#{dicTypeName,jdbcType=VARCHAR},</if>
-		<if test="dicTypeDesc != null and dicTypeDesc != ''">#{dicTypeDesc,jdbcType=VARCHAR},</if>
-		<if test="parentTypeId != null and parentTypeId != ''">#{parentTypeId,jdbcType=VARCHAR},</if>
+		<if test="newsTypeId != null ">#{newsTypeId,jdbcType=BIGINT},</if>
+		<if test="newsTypeName != null and newsTypeName != ''">#{newsTypeName,jdbcType=VARCHAR},</if>
+		<if test="newsTypeDesc != null and newsTypeDesc != ''">#{newsTypeDesc,jdbcType=VARCHAR},</if>
 		<if test="recStatus != null and recStatus != ''">#{recStatus,jdbcType=VARCHAR},</if>
 		<if test="remark != null and remark != ''">#{remark,jdbcType=VARCHAR},</if>
 		<if test="res1 != null and res1 != ''">#{res1,jdbcType=VARCHAR},</if>
@@ -70,53 +66,50 @@
     </trim>
   </insert>
   
-  <update id="updateByPrimaryKeySelective" parameterType="com.bean.DicType" >
-    update dic_type
+  <update id="updateByPrimaryKeySelective" parameterType="app.future.commons.bean.NewsType" >
+    update news_type
     <set >
-      <if test="dicTypeId != null and dicTypeId != ''">dic_type_id = #{dicTypeId,jdbcType=VARCHAR},</if>
-      <if test="dicTypeName != null and dicTypeName != ''">dic_type_name = #{dicTypeName,jdbcType=VARCHAR},</if>
-      <if test="dicTypeDesc != null and dicTypeDesc != ''">dic_type_desc = #{dicTypeDesc,jdbcType=VARCHAR},</if>
-      <if test="parentTypeId != null and parentTypeId != ''">parent_type_id = #{parentTypeId,jdbcType=VARCHAR},</if>
+      <if test="newsTypeId != null ">news_type_id = #{newsTypeId,jdbcType=BIGINT},</if>
+      <if test="newsTypeName != null and newsTypeName != ''">news_type_name = #{newsTypeName,jdbcType=VARCHAR},</if>
+      <if test="newsTypeDesc != null and newsTypeDesc != ''">news_type_desc = #{newsTypeDesc,jdbcType=VARCHAR},</if>
       <if test="recStatus != null and recStatus != ''">rec_status = #{recStatus,jdbcType=VARCHAR},</if>
       <if test="remark != null and remark != ''">remark = #{remark,jdbcType=VARCHAR},</if>
       <if test="res1 != null and res1 != ''">res1 = #{res1,jdbcType=VARCHAR},</if>
       <if test="createTime != null ">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
       <if test="modifyTime != null ">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
     </set>
-    where dic_type_id= #{dicTypeId,jdbcType=VARCHAR}
+    where news_type_id= #{newsTypeId,jdbcType=BIGINT}
   </update>
  
-  <update id="updateByPrimaryKey" parameterType="com.bean.DicType" >
-    update dic_type
+  <update id="updateByPrimaryKey" parameterType="app.future.commons.bean.NewsType" >
+    update news_type
     <set>
-      dic_type_id = #{dicTypeId,jdbcType=VARCHAR},
-      dic_type_name = #{dicTypeName,jdbcType=VARCHAR},
-      dic_type_desc = #{dicTypeDesc,jdbcType=VARCHAR},
-      parent_type_id = #{parentTypeId,jdbcType=VARCHAR},
+      news_type_id = #{newsTypeId,jdbcType=BIGINT},
+      news_type_name = #{newsTypeName,jdbcType=VARCHAR},
+      news_type_desc = #{newsTypeDesc,jdbcType=VARCHAR},
       rec_status = #{recStatus,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       res1 = #{res1,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     </set>
-    where dic_type_id= #{dicTypeId,jdbcType=VARCHAR}
+    where news_type_id= #{newsTypeId,jdbcType=BIGINT}
   </update>
  
   <sql id="findCondition">
-		<if test="dicTypeId != null and dicTypeId != '' ">and  dic_type_id = #{dicTypeId,jdbcType=VARCHAR}</if>
-		<if test="dicTypeName != null and dicTypeName != '' ">and  dic_type_name = #{dicTypeName,jdbcType=VARCHAR}</if>
-		<if test="dicTypeDesc != null and dicTypeDesc != '' ">and  dic_type_desc = #{dicTypeDesc,jdbcType=VARCHAR}</if>
-		<if test="parentTypeId != null and parentTypeId != '' ">and  parent_type_id = #{parentTypeId,jdbcType=VARCHAR}</if>
+		<if test="newsTypeId != null  ">and  news_type_id = #{newsTypeId,jdbcType=BIGINT}</if>
+		<if test="newsTypeName != null and newsTypeName != '' ">and  news_type_name = #{newsTypeName,jdbcType=VARCHAR}</if>
+		<if test="newsTypeDesc != null and newsTypeDesc != '' ">and  news_type_desc = #{newsTypeDesc,jdbcType=VARCHAR}</if>
 		<if test="recStatus != null and recStatus != '' ">and  rec_status = #{recStatus,jdbcType=VARCHAR}</if>
 		<if test="remark != null and remark != '' ">and  remark = #{remark,jdbcType=VARCHAR}</if>
 		<if test="res1 != null and res1 != '' ">and  res1 = #{res1,jdbcType=VARCHAR}</if>
 		<if test="createTime != null  ">and  create_time = #{createTime,jdbcType=TIMESTAMP}</if>
 		<if test="modifyTime != null  ">and  modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
   </sql>
-  <select id="find" resultMap="BaseResultMap" parameterType="com.bean.DicType" >
+  <select id="find" resultMap="BaseResultMap" parameterType="app.future.commons.bean.NewsType" >
     select 
     <include refid="Base_Column_List" />
-    from dic_type
+    from news_type
     <where>
 	  <include refid="findCondition"/>
 	</where>
@@ -126,9 +119,9 @@
 	</if>
   </select>
   
-  <select id="findTotal" resultType="java.lang.Long" parameterType="com.bean.DicType" >
+  <select id="findTotal" resultType="java.lang.Long" parameterType="app.future.commons.bean.NewsType" >
     select count(1)
-    from dic_type
+    from news_type
     <where>
 	  <include refid="findCondition"/>
 	</where>

@@ -1,0 +1,184 @@
+﻿drop table if exists news_channels;
+
+/*==============================================================*/
+/* Table: news_channels                                         */
+/*==============================================================*/
+create table news_channels
+(
+   channels_id          bigint(5) primary key auto_increment comment '频道ID',
+   channels_name        varchar(10) comment '频道名称',
+   channels_desc        varchar(500) comment '频道说明',
+   channel_priority     int(2) comment '频道优先级',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '新闻频道表';
+
+drop table if exists news_type;
+
+/*==============================================================*/
+/* Table: news_type                                             */
+/*==============================================================*/
+create table news_type
+(
+   news_type_id         bigint(10) primary key auto_increment comment '新闻类别ID',
+   news_type_name       varchar(10) comment '新闻类别名称',
+   news_type_desc       varchar(500) comment '新闻类别说明',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '新闻类别表';
+
+drop table if exists news_info;
+
+/*==============================================================*/
+/* Table: news_info                                             */
+/*==============================================================*/
+create table news_info
+(
+   news_id              bigint(20) primary key auto_increment comment '新闻ID',
+   news_title           varchar(200) comment '新闻标题',
+   news_type            bigint(5) comment '新闻类别',
+   news_resource_id     bigint(10) comment '新闻来源',
+   news_link            varchar(500) comment '新闻链接',
+   resource_type        varchar(5) comment '资源类型(纯文本、视频、图片)',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '新闻表';
+
+drop table if exists channel_news_type_relation;
+
+/*==============================================================*/
+/* Table: channel_news_type_relation                            */
+/*==============================================================*/
+create table channel_news_type_relation
+(
+   channel_news_type_id bigint(10) primary key auto_increment comment '频道新闻类别关联ID',
+   channel_id           bigint(10) comment '频道ID',
+   news_type_id         bigint(10) comment '新闻类别ID',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '频道新闻类别关联表';
+
+drop table if exists users_account;
+
+/*==============================================================*/
+/* Table: users_account                                         */
+/*==============================================================*/
+create table users_account
+(
+   user_id              bigint(20) primary key auto_increment comment '用户ID',
+   user_account         varchar(20) comment '账号',
+   user_passwd          varchar(100) comment '密码',
+   user_account_type    varchar(5) comment '账号类型',
+   user_name            varchar(100) comment '姓名',
+   user_nickname        varchar(100) comment '昵称',
+   user_age             int comment '年龄',
+   idcard_no            varchar(30) comment '身份证号',
+   user_email           varchar(50) comment '邮箱',
+   user_phone           varchar(13) comment '手机号',
+   account_status       varchar(5) comment '账号状态',
+   user_head_img        varchar(200) comment '用户头像链接',
+   education            varchar(10) comment '学历',
+   profession           varchar(10) comment '职业',
+   province             varchar(5) comment '省份',
+   city                 varchar(5) comment '城市',
+   area                 varchar(30) comment '地区',
+   addr                 varchar(500) comment '地址',
+   register_resource    varchar(10) comment '注册来源',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '用户表';
+
+drop table if exists user_channel_relation;
+
+/*==============================================================*/
+/* Table: user_channel_relation                                 */
+/*==============================================================*/
+create table user_channel_relation
+(
+   user_channel_id      bigint(20) primary key auto_increment comment '用户频道关联ID',
+   user_id              bigint(20) comment '用户ID',
+   channel_id           bigint(10) comment '频道ID',
+   priority             varchar(5) comment '频道优先级',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '用户频道关联表';
+
+drop table if exists user_new_type_relation;
+
+/*==============================================================*/
+/* Table: user_new_type_relation                                */
+/*==============================================================*/
+create table user_new_type_relation
+(
+   user_news_type_id    bigint(20) primary key auto_increment comment '用户新闻类别关联ID',
+   user_id              bigint(20) comment '用户ID',
+   news_type_id         bigint(10) comment '新闻类别ID',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '用户新闻类别关联表';
+
+drop table if exists dic_type;
+
+/*==============================================================*/
+/* Table: dic_type                                              */
+/*==============================================================*/
+create table dic_type
+(
+   dic_type_id          varchar(30) primary key comment '字典类型id',
+   dic_type_name        varchar(100) comment '字典类型名称',
+   dic_type_desc        varchar(300) comment '字典类型描述',
+   parent_type_id       varchar(30) comment '字典所属父类型',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '字典类型表';
+
+drop table if exists dic_item;
+
+/*==============================================================*/
+/* Table: dic_item                                              */
+/*==============================================================*/
+create table dic_item
+(
+   id                   bigint(20) primary key auto_increment comment '自增长id',
+   dic_item_id          varchar(30) comment '字典项id',
+   dic_item_name        varchar(100) comment '字典项名称',
+   dic_type_id          varchar(30) comment '字典类型',
+   dic_item_desc        varchar(300) comment '字典描述',
+   rec_status           varchar(2) default '1' comment '状态(1:有效 2:无效)',
+   remark               varchar(10) comment '备注',
+   res1                 varchar(10) comment '保留字段',
+   create_time timestamp NULL DEFAULT NULL COMMENT '创建时间',
+   modify_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间'
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '字典表';
